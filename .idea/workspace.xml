@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="462146eb-da81-4a9b-a8fc-b5a15d9839de" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go Application" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/snap/go/4301" />
+  <component name="ProjectId" id="1QFnOiQyG6qizIK6ytwZaIceQcE" />
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go Application" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$USER_HOME$/Desktop/temp" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Go Build.go build myTest.go">
+    <configuration name="go build IterateJSON.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="awesomeProject2" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="DIRECTORY" />
+      <filePath value="$PROJECT_DIR$/IterateJSON.go" />
+      <package value="awesomeProject2" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build IterateJSON.go (4)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject2" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="DIRECTORY" />
+      <filePath value="$PROJECT_DIR$/IterateJSON.go" />
+      <package value="awesomeProject2" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build IterateJSON.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject2" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="DIRECTORY" />
+      <filePath value="$PROJECT_DIR$/IterateJSON.go" />
+      <package value="awesomeProject2" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build awesomeProject2" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject2" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="DIRECTORY" />
+      <filePath value="$PROJECT_DIR$/myTest.go" />
+      <package value="awesomeProject2" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build myTest.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject2" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/myTest.go" />
+      <package value="awesomeProject2" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Build.go build myTest.go" />
+      <item itemvalue="Go Build.go build IterateJSON.go (4)" />
+      <item itemvalue="Go Build.go build IterateJSON.go" />
+      <item itemvalue="Go Build.go build awesomeProject2" />
+      <item itemvalue="Go Build.go build IterateJSON.go (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build myTest.go" />
+        <item itemvalue="Go Build.go build IterateJSON.go (1)" />
+        <item itemvalue="Go Build.go build awesomeProject2" />
+        <item itemvalue="Go Build.go build IterateJSON.go" />
+        <item itemvalue="Go Build.go build IterateJSON.go (4)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
