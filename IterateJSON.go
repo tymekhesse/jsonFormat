@@ -1,13 +1,15 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"reflect"
 )
 
 type schema struct {
-	Name   string `json:"name"`
-	Type  string	`json:"type"`
-	Mode   string	`json:"mode"`
+	Name   string    `json:"name"`
+	Type   string    `json:"type"`
+	Mode   string    `json:"mode"`
 	Fields *[]schema `json:"fields,omitempty"`
 }
 
@@ -15,57 +17,35 @@ func iterate(data interface{}) []schema {
 
 	tmp := make([]schema, 0)
 
-
 	if reflect.ValueOf(data).Kind() == reflect.Slice {
-		//fields := iterate(d.MapIndex(k).Interface())
-		//d := reflect.ValueOf(data)
-		//tmpData := make([]interface{}, d.Len())
-		//returnSlice := make([]interface{}, d.Len())
-		//for i := 0; i < d.Len(); i++ {
-		//	tmpData[i] = d.Index(i).Interface()
-		//}
-		//
-		//for i, v := range tmpData {
-		//	returnSlice[i] = iterate(v)
-		//}
-		//
-		//return returnSlice
+
 		d := reflect.ValueOf(data)
-		for i := 0; i <d.Len(); i++ {
-		dTemp, err := d.Index(i).Interface().(map[string]interface{})
-		if !err {
-			continue
-		}
+		for i := 0; i < d.Len(); i++ {
+			dTemp, err := d.Index(i).Interface().(map[string]interface{})
+			if !err {
+				continue
+			}
 
 			for k, v := range dTemp {
 
-					typeOfValue := reflect.TypeOf(v).Kind()
+				typeOfValue := reflect.TypeOf(v).Kind()
 
-					if typeOfValue == reflect.Map  || typeOfValue == reflect.Slice  {
-						fields := iterate(v)
-						if isUnique(tmp, k) {
-							tmp = append(tmp, schema{k, schemaType(typeOfValue.String()), "NULLABLE", &fields})
-						}
-					} else {
-						if isUnique(tmp, k) {
-							tmp = append(tmp, schema{k, schemaType(typeOfValue.String()), "NULLABLE", nil})
-						}
-					}
+				if typeOfValue == reflect.Map || typeOfValue == reflect.Slice {
+					fields := iterate(v)
 
+					tmp = append(tmp, schema{k, schemaType(v), isArray(typeOfValue.String()), fieldz(&fields)})
+
+				} else {
+
+					tmp = append(tmp, schema{k, schemaType(v), isArray(typeOfValue.String()), nil})
+
+				}
 
 			}
 
 		}
 	} else if reflect.ValueOf(data).Kind() == reflect.Map {
 		d := reflect.ValueOf(data)
-		//tmpData := make(map[string]interface{})
-		//iterator := d.MapRange()
-		//for iterator.Next() {
-		//	value := iterator.Value()
-		//	tmp= append(tmp,schema{iterator.Key().String(),reflect.ValueOf(value).Kind().String(),"NULLABLE",nil})
-		//}
-
-
 
 		for _, k := range d.MapKeys() {
 
@@ -73,44 +53,73 @@ func iterate(data interface{}) []schema {
 
 			if typeOfValue == reflect.Map || typeOfValue == reflect.Slice {
 				fields := iterate(d.MapIndex(k).Interface())
-				if isUnique(tmp, k.String()) {
-					tmp = append(tmp, schema{k.String(), schemaType(typeOfValue.String()), "NULLABLE", &fields})
-				}
+
+				tmp = append(tmp, schema{k.String(), schemaType(d.MapIndex(k).Interface()), isArray(typeOfValue.String()), &fields})
+
 			} else {
-				if isUnique(tmp, k.String()) {
-					tmp = append(tmp, schema{k.String(), schemaType(typeOfValue.String()), "NULLABLE", nil})
-				}
+
+				tmp = append(tmp, schema{k.String(), schemaType(d.MapIndex(k).Interface()), isArray(typeOfValue.String()), nil})
+
 			}
 
 		}
 
 	}
+
 	return tmp
 }
-func isUnique(tmp []schema, key string)bool{
-	for _, v := range tmp{
-		if v.Name == key && v.Type != "RECORD" {
-			return false
-		}
+
+func fieldz(fields *[]schema) *[]schema {
+	if len(*fields) > 0 {
+		return fields
 	}
-	return true
+	return nil
+}
+func isArray(str string) string {
+	switch str {
+	case "slice":
+		return "REPEATED"
+	case "map":
+		return "REPEATED"
+	default:
+		return "NULLABLE"
+	}
 }
 
-func schemaType(str string)string{
-	switch str {
-	case "string":
+func schemaType(value interface{}) string {
+	myType := reflect.TypeOf(value)
+	if n, ok := value.(json.Number); ok {
+		// myVar was a number, let's see if its float64 or int64
+		// Check for int64 first because floats can be parsed as ints but not the other way around
+		if v, err := n.Int64(); err != nil {
+			// The number was an integer, v has type of int64
+			fmt.Println(v)
+		}
+		if v, err := n.Float64(); err != nil {
+			// The number was a float, v has type of float64
+			fmt.Println(v)
+		}
+	} else {
+		// myVar wasn't a number at all
+	}
+	switch myType.Kind() {
+
+	case reflect.String:
 		return "STRING"
-	case "slice":
+	case reflect.Slice:
 		return "RECORD"
-	case "float64":
+	case reflect.Float64:
 		return "FLOAT"
-	case "float32":
+	case reflect.Float32:
 		return "FLOAT"
-	case "int":
+	case reflect.Int:
 		return "INTEGER"
-	case "map":
+	case reflect.Int64:
+		return "INTEGER"
+	case reflect.Map:
 		return "RECORD"
 	default:
-		return str
+		return myType.Kind().String()
 	}
+
 }
