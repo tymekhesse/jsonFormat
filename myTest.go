@@ -3,28 +3,24 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tidwall/gjson"
 	"io/ioutil"
 	"os"
 )
 
-
-
-
 func main() {
+	// parseFile()
 
-	file, e := ioutil.ReadFile("./output_new.txt")
+	file, e := ioutil.ReadFile("./outputnew.json")
 	if e != nil {
 		fmt.Printf("File error: %v\n", e)
 		os.Exit(1)
 	}
-	myJson := string(file)
-	m, ok := gjson.Parse(myJson).Value().(interface{})
-	if !ok {
-		fmt.Println("Error")
+	var v interface{}
+	if err := json.Unmarshal(file, &v); err != nil {
+		fmt.Println("error", err)
 	}
 
-	data :=	iterate(m)
-	myJson2,_ := json.Marshal(&data)
-	fmt.Println(string(myJson2))
+	data := iterate(v)
+	myJSON2, _ := json.Marshal(&data)
+	fmt.Println(string(myJSON2))
 }

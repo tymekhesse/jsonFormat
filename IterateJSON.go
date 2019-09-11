@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"reflect"
+	"strings"
 )
 
 type schema struct {
@@ -14,12 +14,10 @@ type schema struct {
 }
 
 func iterate(data interface{}) []schema {
-
 	tmp := make([]schema, 0)
+	d := reflect.ValueOf(data)
 
-	if reflect.ValueOf(data).Kind() == reflect.Slice {
-
-		d := reflect.ValueOf(data)
+	if d.Kind() == reflect.Slice {
 		for i := 0; i < d.Len(); i++ {
 			dTemp, err := d.Index(i).Interface().(map[string]interface{})
 			if !err {
@@ -27,43 +25,25 @@ func iterate(data interface{}) []schema {
 			}
 
 			for k, v := range dTemp {
-
 				typeOfValue := reflect.TypeOf(v).Kind()
-
 				if typeOfValue == reflect.Map || typeOfValue == reflect.Slice {
 					fields := iterate(v)
-
 					tmp = append(tmp, schema{k, schemaType(v), isArray(typeOfValue.String()), fieldz(&fields)})
-
 				} else {
-
 					tmp = append(tmp, schema{k, schemaType(v), isArray(typeOfValue.String()), nil})
-
 				}
-
 			}
-
 		}
-	} else if reflect.ValueOf(data).Kind() == reflect.Map {
-		d := reflect.ValueOf(data)
-
+	} else if d.Kind() == reflect.Map {
 		for _, k := range d.MapKeys() {
-
 			typeOfValue := reflect.TypeOf(d.MapIndex(k).Interface()).Kind()
-
 			if typeOfValue == reflect.Map || typeOfValue == reflect.Slice {
 				fields := iterate(d.MapIndex(k).Interface())
-
 				tmp = append(tmp, schema{k.String(), schemaType(d.MapIndex(k).Interface()), isArray(typeOfValue.String()), &fields})
-
 			} else {
-
 				tmp = append(tmp, schema{k.String(), schemaType(d.MapIndex(k).Interface()), isArray(typeOfValue.String()), nil})
-
 			}
-
 		}
-
 	}
 
 	return tmp
@@ -87,39 +67,18 @@ func isArray(str string) string {
 }
 
 func schemaType(value interface{}) string {
-	myType := reflect.TypeOf(value)
-	if n, ok := value.(json.Number); ok {
-		// myVar was a number, let's see if its float64 or int64
-		// Check for int64 first because floats can be parsed as ints but not the other way around
-		if v, err := n.Int64(); err != nil {
-			// The number was an integer, v has type of int64
-			fmt.Println(v)
-		}
-		if v, err := n.Float64(); err != nil {
-			// The number was a float, v has type of float64
-			fmt.Println(v)
-		}
-	} else {
-		// myVar wasn't a number at all
-	}
-	switch myType.Kind() {
-
+	switch reflect.TypeOf(value).Kind() {
 	case reflect.String:
 		return "STRING"
-	case reflect.Slice:
+	case reflect.Slice, reflect.Map:
 		return "RECORD"
 	case reflect.Float64:
-		return "FLOAT"
-	case reflect.Float32:
-		return "FLOAT"
-	case reflect.Int:
+		x, _ := json.Marshal(value)
+		if strings.Contains(string(x), ".") {
+			return "FLOAT"
+		}
 		return "INTEGER"
-	case reflect.Int64:
-		return "INTEGER"
-	case reflect.Map:
-		return "RECORD"
 	default:
-		return myType.Kind().String()
+		return reflect.TypeOf(value).Kind().String()
 	}
-
 }
