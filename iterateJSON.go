@@ -57,9 +57,7 @@ func fieldz(fields *[]schema) *[]schema {
 }
 func isArray(str string) string {
 	switch str {
-	case "slice":
-		return "REPEATED"
-	case "map":
+	case "slice", "map":
 		return "REPEATED"
 	default:
 		return "NULLABLE"

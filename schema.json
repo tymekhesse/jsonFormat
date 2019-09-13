@@ -1,0 +1,150 @@
+[
+  {
+    "name": "seatbid",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "name": "bid",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "price",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "adm",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "adomain",
+            "type": "RECORD",
+            "mode": "REPEATED"
+          },
+          {
+            "name": "crid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "h",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "impid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "w",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "adid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "ext",
+            "type": "RECORD",
+            "mode": "REPEATED",
+            "fields": [
+              {
+                "name": "advid",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              },
+              {
+                "name": "appnexus",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                  {
+                    "name": "auction_id",
+                    "type": "INTEGER",
+                    "mode": "NULLABLE"
+                  },
+                  {
+                    "name": "bid_ad_type",
+                    "type": "INTEGER",
+                    "mode": "NULLABLE"
+                  },
+                  {
+                    "name": "bidder_id",
+                    "type": "INTEGER",
+                    "mode": "NULLABLE"
+                  },
+                  {
+                    "name": "brand_id",
+                    "type": "INTEGER",
+                    "mode": "NULLABLE"
+                  }
+                ]
+              },
+              {
+                "name": "dspid",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+              }
+            ]
+          },
+          {
+            "name": "id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "dealid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "iurl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "attr",
+            "type": "RECORD",
+            "mode": "REPEATED"
+          },
+          {
+            "name": "cat",
+            "type": "RECORD",
+            "mode": "REPEATED"
+          },
+          {
+            "name": "cid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      },
+      {
+        "name": "seat",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "name": "bidid",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "cur",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]

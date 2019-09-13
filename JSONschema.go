@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-	// parseFile()
+	parseFile("./output3.json")
 
-	file, e := ioutil.ReadFile("./outputnew.json")
+	file, e := ioutil.ReadFile("./merged.json")
 	if e != nil {
 		fmt.Printf("File error: %v\n", e)
 		os.Exit(1)
@@ -21,6 +21,6 @@ func main() {
 	}
 
 	data := iterate(v)
-	myJSON2, _ := json.Marshal(&data)
-	fmt.Println(string(myJSON2))
+	schemaJSON, _ := json.MarshalIndent(&data, "", "  ")
+	ioutil.WriteFile("schema.json", schemaJSON, 0644)
 }
