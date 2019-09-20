@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-	file, e := ioutil.ReadFile("./output_new.txt")
+	file, e := ioutil.ReadFile("./outputnew.json")
 	if e != nil {
 		fmt.Printf("File error: %v\n", e)
 		os.Exit(1)

@@ -1,27 +1,150 @@
-{
-  "seatbid": [
-    {
-      "bid": [
-        {
-          "price": 5,
-          "id": "ed8249a8-e5eb-4991-8d12-61a44da6c444",
-          "ext": {
-            "improvedigital": {
-              "brand_name": "",
-              "bidder_id": 0
-            }
+[
+  {
+    "name": "bidid",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "cur",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "seatbid",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {
+        "name": "seat",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "bid",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+          {
+            "name": "impid",
+            "type": "STRING",
+            "mode": "NULLABLE"
           },
-          "h": 250,
-          "w": 300,
-          "crid": "442494",
-          "impid": "22228682256d2",
-          "cid": "243942",
-          "adm": "<html><body style=\"margin:0%\"><a href=\"http://www.chris.com\" target=\"_blank\"><img style=\"border: 0;\" border=\"0\" width=\"300\" height=\"250\" src=\"http://test.360yield.com/file/462456/image.png\" alt=\"\"/></a><img src=\"http://dev.360yield.com/imp_pixel?ic=6VklRsq9o5xrXzvv8Nt.tIsDWatADUgD-p.PGeBmKjxydN-TyfGPiXDy8MGEwZ9NmTud7myonIHo.yI.cIu9QJStRckT9x.KKYVqV-jNoAOqyn6tN4reoUZ.f.DAd60FLg9Ghe2e8BEZ.TPuwl9A.ULfy8pva3.ymfRUQguUwBDfjFzNf75p3FZlVTmjoITc0IlRYsw7vis0F69d-ghHsYh9I0DybX0SJTe9thNhzeUtuZZW2ogWeotxBvJe2huDW9z6JdG2YBMT4DYC2MYUMQAbZg4kJGcn9u15aJeJxUlUH2kMUapTwZOEgmXl6AHf9f7uOqNKFq1bwdcN6pGBr3TyOCJLnx0sC4NSTlqHinsuEXhBkUPEzZ0O6gmHb.bPdqDrdmZ3.pxm2REpzqnzPKX.S7SRA93va6uke-FAew3CVfzeQ3OSbSJr950hIw2Lwxh2ooznGCTdZMvb5sg0RoIixZcwP0YFHbBsIGVPhBLAkcqUz5zPMsejOtpn78WczpywGhfGnOGP-Vkk9PN9jyrAcqqb6aNj3zKVv6mkD7-YUQTbcDiqvh35kRW853okuKemazoaRa85kpNcMWdjdxCJw.1b3OHku4p1bWhBjRolJ7Ka-RXofZAIZOSxdQ==\" alt=\" \" style=\"display:none\"/><improvedigital_ad_output_information tp_id=\"\" buyer_id=\"0\" rtb_advertiser=\"\" campaign_id=\"243942\" line_item_id=\"362121\" creative_id=\"442494\" crid=\"0\" placement_id=\"1192597\"></improvedigital_ad_output_information></body></html>"
-        }
-      ],
-      "seat": "improvedigital"
-    }
-  ],
-  "cur": "USD",
-  "id": "7339f676-5af1-4e09-b85a-b14eb9e3224d"
-}"
+          {
+            "name": "adomain",
+            "type": "RECORD",
+            "mode": "REPEATED"
+          },
+          {
+            "name": "h",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "w",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "price",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "cid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "ext",
+            "type": "RECORD",
+            "mode": "REPEATED",
+            "fields": [
+              {
+                "name": "appnexus",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                  {
+                    "name": "brand_id",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                  },
+                  {
+                    "name": "auction_id",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                  },
+                  {
+                    "name": "bidder_id",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                  },
+                  {
+                    "name": "bid_ad_type",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                  }
+                ]
+              },
+              {
+                "name": "dspid",
+                "type": "FLOAT",
+                "mode": "NULLABLE"
+              },
+              {
+                "name": "advid",
+                "type": "FLOAT",
+                "mode": "NULLABLE"
+              }
+            ]
+          },
+          {
+            "name": "attr",
+            "type": "RECORD",
+            "mode": "REPEATED"
+          },
+          {
+            "name": "adid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "crid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "cat",
+            "type": "RECORD",
+            "mode": "REPEATED"
+          },
+          {
+            "name": "adm",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "iurl",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "dealid",
+            "type": "STRING",
+            "mode": "NULLABLE"
+          }
+        ]
+      }
+    ]
+  }
+]

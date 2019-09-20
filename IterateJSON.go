@@ -33,11 +33,11 @@ func iterate(data interface{}) []schema {
 				if typeOfValue == reflect.Map || typeOfValue == reflect.Slice {
 					fields := iterate(v)
 
-					tmp = append(tmp, schema{k, schemaType(v), isArray(typeOfValue.String()), fieldz(&fields)})
+					tmp = append(tmp, schema{k, schemaType(typeOfValue), isArray(typeOfValue.String()), fieldz(&fields)})
 
 				} else {
 
-					tmp = append(tmp, schema{k, schemaType(v), isArray(typeOfValue.String()), nil})
+					tmp = append(tmp, schema{k, schemaType(typeOfValue), isArray(typeOfValue.String()), nil})
 
 				}
 
@@ -54,11 +54,11 @@ func iterate(data interface{}) []schema {
 			if typeOfValue == reflect.Map || typeOfValue == reflect.Slice {
 				fields := iterate(d.MapIndex(k).Interface())
 
-				tmp = append(tmp, schema{k.String(), schemaType(d.MapIndex(k).Interface()), isArray(typeOfValue.String()), &fields})
+				tmp = append(tmp, schema{k.String(), schemaType(typeOfValue), isArray(typeOfValue.String()), &fields})
 
 			} else {
 
-				tmp = append(tmp, schema{k.String(), schemaType(d.MapIndex(k).Interface()), isArray(typeOfValue.String()), nil})
+				tmp = append(tmp, schema{k.String(), schemaType(typeOfValue), isArray(typeOfValue.String()), nil})
 
 			}
 
@@ -87,7 +87,6 @@ func isArray(str string) string {
 }
 
 func schemaType(value interface{}) string {
-	myType := reflect.TypeOf(value)
 	if n, ok := value.(json.Number); ok {
 		// myVar was a number, let's see if its float64 or int64
 		// Check for int64 first because floats can be parsed as ints but not the other way around
@@ -99,10 +98,8 @@ func schemaType(value interface{}) string {
 			// The number was a float, v has type of float64
 			fmt.Println(v)
 		}
-	} else {
-		// myVar wasn't a number at all
 	}
-	switch myType.Kind() {
+	switch value {
 
 	case reflect.String:
 		return "STRING"
@@ -119,7 +116,7 @@ func schemaType(value interface{}) string {
 	case reflect.Map:
 		return "RECORD"
 	default:
-		return myType.Kind().String()
+		return reflect.ValueOf(value).String()
 	}
 
 }
