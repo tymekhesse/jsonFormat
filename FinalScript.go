@@ -24,13 +24,13 @@ func main() {
 	slice := make([]string, 0)
 	file := readFile(rawFileInputPath)
 	jsonFromFile := fileToJson(file)
-	slice := jsonToSlice(jsonFromFile)
+	slice = jsonToSlice(jsonFromFile)
 
 
 	writeToFile(slice)
 }
 
-func readFile(filePath string) (file os.File) {
+func readFile(filePath string) (file []byte) {
 
 	fmt.Printf("// reading file %s\n", filePath)
 	file, err1 := ioutil.ReadFile(filePath)
@@ -50,7 +50,7 @@ func jsonToSlice(obj jsonObj) (slice []string) {
 	return
 }
 
-func fileToJson(file os.File) (obj jsonObj) {
+func fileToJson(file []byte) (obj jsonObj) {
 	err2 := json.Unmarshal(file, &obj)
 	if err2 != nil {
 		fmt.Println("error:", err2)
@@ -58,7 +58,7 @@ func fileToJson(file os.File) (obj jsonObj) {
 	}
 	return
 }
-func writeToFile(slice []string) {
+func writeToFile(slice []string, isSchema bool) {
 
 	f, err := os.Create("output3formatted.txt")
 	if err != nil {
@@ -66,14 +66,22 @@ func writeToFile(slice []string) {
 		return
 	}
 	var sb strings.Builder
-	//sb.WriteString("[")
+	if !isSchema {
+		sb.WriteString("[")
+	}
 	for i := 0; i < len(slice); i++ {
 		sb.WriteString(slice[i])
 		if i < len(slice)-1 {
-			sb.WriteString("\r\n")
+			if isSchema {
+				sb.WriteString("\r\n")
+			} else {
+				sb.WriteString(",")
+			}
 		}
 	}
-
+	if !isSchema {
+		sb.WriteString("]")
+	}
 	l, err := f.WriteString(sb.String())
 	if err != nil {
 		fmt.Println(err)
